@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css units </title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        html{
+            font-size: 12px;
+        }
+        .box{
+            /* width:1400px; */
+            width:80vw;
+            height: 10vh;
+            margin:auto;
+            background-color:aqua;
+            border:1px solid black;
+        }
+        .container{
+            width:80vw;
+            height:80vh;
+            border:1px solid black;
+            margin:23px auto;
+            background-color:lightgreen;
+            font-size: 18px;
+        }
+        .container> p{
+            font-size: 2em;
+        }
+        .mycont{
+            box-sizing: border-box;
+            margin: 23px auto;
+            color:rgb(73, 73, 59);
+            font-size:22px;
+            width:80vw;
+            border:1px solid black;
+        }
+        .parent{
+            background-color: rgb(76, 0, 255);
+        }
+        @media (max-width:600px){
+            .parent{
+                background-color: brown ;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        hjjhguh
+    </div>
+    <div class="box">
+        This is a box
+    </div>
+    <div class="container">
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident assumenda repellat ratione sequi, aspernatur exercitationem quaerat omnis perferendis odio dolorum sit molestias inventore dicta? Iusto repellat molestiae, natus porro consequatur sapiente excepturi accusantium harum aspernatur explicabo fugiat eligendi quia blanditiis. Culpa vitae vel aut voluptatibus facilis iure nihil quasi quos.
+        </p>
+       
+    </div>
+    <div class="mycont">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    
+    </div>
+</body>
+</html>

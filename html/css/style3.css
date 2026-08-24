@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial;
+    display: flex;
+    flex-direction: column;
+}
+header{
+    background-color:#5a792c;
+    display: flex;
+    align-items: center;
+}
+
+header ul{
+    list-style: none;
+    display: flex;
+    padding: 10px 0;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+#menu li{
+    padding: 10px;
+}
+
+#logo{
+    margin: 0 auto;
+    font-size: 25px;
+}
+
+#social-links li{
+    padding: 10px;
+}
