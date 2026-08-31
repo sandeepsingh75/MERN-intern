@@ -23,25 +23,79 @@
 
 // ---------------------------second method -----------------------------------
 
-function sumZero(arr){
-    let left = 0;
-    let right = arr.length-1;
-    while(left<right){
-        let c= arr[left]+arr[right];   
-        if(c===0){
-            return [arr[left], arr[right]]
-        }else if(c<0){
-            left++;
-        }else if(c>0){
-            right--;
-        }
-         c= arr[left]+arr[right]; 
-        console.log(arr[left]+arr[right])
-    }
+// function sumZero(arr){
+//     let left = 0;
+//     let right = arr.length-1;
+//     while(left<right){
+//         let c= arr[left]+arr[right];   
+//         if(c===0){
+//             return [arr[left], arr[right]]
+//         }else if(c<0){
+//             left++;
+//         }else if(c>0){
+//             right--;
+//         }
+//          c= arr[left]+arr[right]; 
+//         console.log(arr[left]+arr[right])
+//     }
 
-    // console.log(c);
+//     // console.log(c);
+// }
+
+// const result=sumZero([-5,-4,-3,-2,0,2,4,6,8]);
+// console.log(result)
+
+
+
+
+// --------------------------------- 3. Find Unique Number --------------------------------
+
+
+// function uniqueNumber(arr){
+//     console.log(arr)
+//     if(arr.length){
+//         let i=0;
+//         for(let j=1;j<arr.length;j++){
+//             if(arr[i]!== arr[j]){
+//                 i++;
+//                 arr[i]=arr[j];
+
+//             }
+//         }
+//         return i+1;
+//     }else{
+//         throw new Error('empty array')
+//     }
+// }
+// let result = uniqueNumber([1,1,2,3,3,4,4,5,6,7,7,8])
+// console.log(result)
+
+
+
+// -------------------------------------- Next Problem -----------------------------------------------
+// [1,2,3,4,3,5,4,6,7,8]  => total element
+// count largest sum of consecutive digits
+// num=4
+//sum = 25
+
+
+function largestSum(arr, num){
+if(num > arr){
+throw new Error("number is not grater than array")
+}else{
+    let max=0;
+    for(let i=0; i<arr.length-num+1;i++){
+        let temp=0;
+        for(let j=i;j<(i+num); j++){
+            temp += arr[j]
+        }
+        if(temp > max){
+            max=temp;
+        }
+    }
+    return max;
+}
 }
 
-const result=sumZero([-5,-4,-3,-2,0,2,4,6,8]);
+const result = largestSum([1,2,3,4,3,5,4,6,7,8,9],4);
 console.log(result)
-
