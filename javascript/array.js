@@ -115,5 +115,5 @@
 // console.log(doubled); // [2, 4, 6]
 
 // Generates a sequence from 0 to 4
-const sequence = Array.from({ length: 5 }, (_, index) => index);
-console.log(sequence); // [0, 1, 2, 3, 4]
+// const sequence = Array.from({ length: 5 }, (_, index) => index);
+// console.log(sequence); // [0, 1, 2, 3, 4]

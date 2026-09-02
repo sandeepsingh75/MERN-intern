@@ -116,7 +116,7 @@
 
 
 // ============================ Next problem ==============================
-// Check square in another array
+// Check square in another array (time complexity o(n^2))
 // arr1 = [1,2,3,4,5] , arr2 = [1,4,9,16,25]
 
 // function checkSquare(arr1, arr2){
@@ -133,22 +133,73 @@
 // }
 
 
-function checkSquare(arr1, arr2){
-    for(let i=0; i< arr1.length; i++){
-        let isSquare = false;
-        for(let j=0; j< arr2.length;j++){
-            if(arr1[i] * arr1[i] === arr2[j]){
-                isSquare = true;
-            }
-            if(j === arr2.length - 1){
-                if(!isSquare){
-                    return false
-                }
-            }
-        }                
+// function checkSquare(arr1, arr2){
+//     for(let i=0; i< arr1.length; i++){
+//         let isSquare = false;
+//         for(let j=0; j< arr2.length;j++){
+//             if(arr1[i] * arr1[i] === arr2[j]){
+//                 isSquare = true;
+//             }
+//             if(j === arr2.length - 1){
+//                 if(!isSquare){
+//                     return false
+//                 }
+//             }
+//         }                
+//     }
+//     return true;
+// }
+
+// let result = checkSquare([1,2,3,4,5],[1,4,9,16,25,36])
+// console.log(result)
+
+
+// Check square in another array (time complexity o(n))
+// arr1 = [1,2,3,4,5] , arr2 = [1,4,9,16,25]
+
+// function checkSquare(arr1, arr2){
+//     let map1 = {};
+//     let map2 = {};
+    
+//     for(item1 of arr1){
+//         map1[item1] = (map1[item1] || 0) + 1;
+//     }
+//     // console.log(map1)
+//     for(item2 of arr2){
+//         map2[item2] = (map2[item2] || 0) + 1;
+//     }
+//     // console.log(map2)
+//     for(let key in map1){
+//         if(!map2[key*key]){
+//             return false;
+//         }
+//         if(map1[key] !== map2[key * key]){
+//             return false;
+//         }
+//     }
+//     return true;
+//     // console.log(map1)
+//     // console.log(map2)
+// }
+
+
+// let result = checkSquare([1,2,3,4,5], [1,4,9,16,25])
+// console.log(result)
+
+
+
+
+// ====================================== Next Problem ===============================
+// Recursive function
+let counter =1;
+function add(num){
+    if(num < counter){
+        return;
     }
-    return true;
+    console.log("counter: ", counter);
+    counter++;
+
+    add(num);
 }
 
-let result = checkSquare([1,2,3,4,5],[1,4,9,16,25,36])
-console.log(result)
+add(10)
