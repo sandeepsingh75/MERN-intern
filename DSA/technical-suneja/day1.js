@@ -112,9 +112,6 @@
 // const result = searchlog([1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15], 7);
 // console.log(result);
 
-
-
-
 // ============================ Next problem ==============================
 // Check square in another array (time complexity o(n^2))
 // arr1 = [1,2,3,4,5] , arr2 = [1,4,9,16,25]
@@ -126,12 +123,11 @@
 //             // return "square not available";
 //             return false
 //         }
-        
+
 //     }
 //     // return console.log("all numbers square found in arr2");
 //     return true;
 // }
-
 
 // function checkSquare(arr1, arr2){
 //     for(let i=0; i< arr1.length; i++){
@@ -145,7 +141,7 @@
 //                     return false
 //                 }
 //             }
-//         }                
+//         }
 //     }
 //     return true;
 // }
@@ -153,14 +149,13 @@
 // let result = checkSquare([1,2,3,4,5],[1,4,9,16,25,36])
 // console.log(result)
 
-
 // Check square in another array (time complexity o(n))
 // arr1 = [1,2,3,4,5] , arr2 = [1,4,9,16,25]
 
 // function checkSquare(arr1, arr2){
 //     let map1 = {};
 //     let map2 = {};
-    
+
 //     for(item1 of arr1){
 //         map1[item1] = (map1[item1] || 0) + 1;
 //     }
@@ -182,24 +177,69 @@
 //     // console.log(map2)
 // }
 
-
 // let result = checkSquare([1,2,3,4,5], [1,4,9,16,25])
 // console.log(result)
 
-
-
-
 // ====================================== Next Problem ===============================
 // Recursive function
-let counter =1;
-function add(num){
-    if(num < counter){
-        return;
-    }
-    console.log("counter: ", counter);
-    counter++;
+// let counter =1;
+// function add(num){
+//     if(num < counter){
+//         return;
+//     }
+//     console.log("counter: ", counter);
+//     counter++;
 
-    add(num);
+//     add(num);
+// }
+
+// add(10)
+
+// ================================= Next Problem ========================================
+// Sorting using Recursive Function
+//  [2,3,1.4] => by default case
+
+// let arr = [2, 3, 1, 4];
+
+// ================================== first method ==================================
+
+function sortArray(arr, n = arr.length) {
+    // Base condition
+    if (n === 1) {
+        return arr;
+    }
+
+    // Ek pass: largest element ko end mein bhejo
+    for (let i = 0; i < n - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            let temp = arr[i];
+            arr[i] = arr[i + 1];
+            arr[i + 1] = temp;
+        }
+        console.log(arr)
+    }
+
+    // Remaining array ko recursively sort karo
+    return sortArray(arr, n - 1);
 }
 
-add(10)
+let arr = [2,6, 1,5, 4,3,];
+
+// console.log(sortArray(arr));
+
+
+// ========================================= Second Method ===========================
+// sort the array by recursion method
+// let arr = [2, 3, 1, 4];
+
+// let arr = [2,3,1,4];
+// let i=0;
+// let j=0;
+
+// function sortArr(arr){
+//     for(i=0; i< arr.length; i++){
+
+//     }
+// }
+
+// sortArr(arr)

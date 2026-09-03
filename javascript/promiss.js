@@ -55,13 +55,31 @@
 // })
 
 // Callback Example
-function fetchUser(id, callback) {
-  setTimeout(() => {
-    callback({ id: id, name: "Alex" });
-  }, 2000);
+// function fetchUser(id, callback) {
+//   setTimeout(() => {
+//     callback({ id: id, name: "Alex" });
+//   }, 2000);
+// }
+
+// fetchUser(1, (user) => {
+//   console.log("User loaded:", user);
+//   // Nesting another asynchronous action here creates Callback Hell
+// });
+
+// Function to display any text
+function myDisplayer(text) {
+  // document.getElementById("demo").innerHTML = text;
+  console.log(text)
 }
 
-fetchUser(1, (user) => {
-  console.log("User loaded:", user);
-  // Nesting another asynchronous action here creates Callback Hell
+// Create an async function
+async function hello() {
+  return "Hello World!";
+}
+
+// Call the async function
+hello().then(function(value) {
+  // myDisplayer(value);
+  console.log(value)
 });
+ 
