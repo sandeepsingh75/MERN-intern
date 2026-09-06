@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom traversing</title>
+</head>
+<body><input class="input user" type="text"  id="username" placeholder="Enter the name" style ="background-color: aqua; font-size: 20px; ">
+   <div id="container">
+    <button type="button">Click here</button>
+    <p>iuyyhkj</p>
+   </div>
+        
+
+
+
+    <script>
+        // let txt = document.querySelector(".title");
+        // console.log(txt.parentNode)
+        // console.log(txt.firstChild)
+        // console.log(txt.firstElementChild)
+        // console.log(txt.lastChild)
+        // let elem = document.querySelector(".text2");
+        // console.log(elem.previousElementSibling)
+        // console.log(txt.firstChild)
+        // console.log(parent.children)
+
+        // let div = document.createElement("div");
+        // div.innerHTML = "<p> Hello World </p>";
+
+        // let main = document.querySelector(".main");
+        // main.appendChild(div);
+        
+        // let div = document.createElement("div");
+        // div.innerHTML = "<p> Hello world </p> "
+        // console.log(div)
+        // let main = document.querySelector(".main");
+        // main.appendChild(div)
+        
+        // let card = document.querySelector("#card");
+
+    // let list = card.classList.add("newCard", "new2");
+    // let list = card.classList.remove("newCard");
+    // let list = card.classList.replace("card","para");
+    // let list = card.classList.contains("card");
+    // let list = card.classList.toggle("card");
+        // let container = document.getElementById("container");
+        // let newNode = container.cloneNode(true)
+        // container.removeChild(container.firstElementChild)
+        // console.log(newNode)
+        // let newNode  = document.createElement("p");
+        // newNode.innerText = "sfdsfgdfhdfhfg"
+        // container.insertBefore(newNode, container.firstElementChild)
+
+        // let inputBox = document.getElementById("username"); 
+        // console.log(inputBox.attributes)
+        // inputBox.setAttribute("name","username")
+        // console.log(inputBox.getAttribute("name"))
+        // console.log(inputBox)
+        // console.log(inputBox.hasAttribute("name"))
+        
+        // inputBox.removeAttribute("id")
+        // inputBox.style.padding="20px"
+        // console.log(inputBox.style.backgroundColor)
+        // inputBox.style.cssText = "width:200px"
+        // inputBox.style.cssText += "width:200px"
+        // console.log(window.getComputedStyle(inputBox).backgroundColor)
+        // console.log(inputBox.style)
+
+let username = document.getElementById("username");
+// username.className  = "new"
+// username.className  += "new"
+// console.log(username.className)
+// username.classList.add("new2")
+// username.classList.remove("user","input")
+// username.classList.replace("user", "name")
+
+console.log(username.classList.contains("user"))
+username.classList.toggle("user")
+console.log(username)
+
+        
+        
+        
+        
+        
+
+    </script>
+</body>
+</html>

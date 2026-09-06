@@ -203,27 +203,27 @@
 
 // ================================== first method ==================================
 
-function sortArray(arr, n = arr.length) {
-    // Base condition
-    if (n === 1) {
-        return arr;
-    }
+// function sortArray(arr, n = arr.length) {
+//     // Base condition
+//     if (n === 1) {
+//         return arr;
+//     }
+// console.log("outer")
+//     // Ek pass: largest element ko end mein bhejo
+//     for (let i = 0; i < n - 1; i++) {
+//         if (arr[i] > arr[i + 1]) {
+//             let temp = arr[i];
+//             arr[i] = arr[i + 1];
+//             arr[i + 1] = temp;
+//         }
+//         console.log('inner')
+//     }
 
-    // Ek pass: largest element ko end mein bhejo
-    for (let i = 0; i < n - 1; i++) {
-        if (arr[i] > arr[i + 1]) {
-            let temp = arr[i];
-            arr[i] = arr[i + 1];
-            arr[i + 1] = temp;
-        }
-        console.log(arr)
-    }
+//     // Remaining array ko recursively sort karo
+//     return sortArray(arr, n - 1);
+// }
 
-    // Remaining array ko recursively sort karo
-    return sortArray(arr, n - 1);
-}
-
-let arr = [2,6, 1,5, 4,3,];
+// let arr = [2,6, 1,5, 4,3,];
 
 // console.log(sortArray(arr));
 
@@ -232,14 +232,7 @@ let arr = [2,6, 1,5, 4,3,];
 // sort the array by recursion method
 // let arr = [2, 3, 1, 4];
 
-// let arr = [2,3,1,4];
-// let i=0;
-// let j=0;
 
-// function sortArr(arr){
-//     for(i=0; i< arr.length; i++){
 
-//     }
-// }
 
-// sortArr(arr)
+

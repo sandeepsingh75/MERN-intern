@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model Selection</title>
+</head>
+<body>
+   <h1> Hello</h1>
+   <h1> Hello</h1>
+    <div id="container">
+        <div class="message">second heading</div>
+        <div class="message">third heading</div>
+        <input type="radio" name="language" value="hindi">
+        <input type="radio" name="language" value="english">
+    </div>
+    <h1> go to office</h1>
+
+
+    <script>
+        // let firstHeading = document.getElementById("container");
+        // let message = document.getElementsByClassName("message");
+        // let message = document.getElementsByTagName("h1");
+        // let message = document.getElementsByName("language");
+        // let message= document.querySelector(".message");
+        // let message= document.querySelectorAll(".message");
+        let message= document.querySelectorAll("div, input");
+        console.log(message);
+    </script>
+</body>
+</html>
