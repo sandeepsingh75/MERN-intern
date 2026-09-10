@@ -183,9 +183,9 @@
 //   }
 //   // console.log(obj)
 //   for(let c in obj){
-//     // console.log(obj[c])
-//     if(obj[c]>1){
-//       console.log(c)
+//       if(obj[c]>1){
+//           console.log(c)
+//         //   console.log(obj)
 //     }
 //   }
 // }
@@ -247,3 +247,154 @@
 //   }
 // let result = areEqual([1, 2, 3], [2,3,1]);
 // console.log(result)
+
+
+// ==================================  Linear Search ( Time: O(n) ) ================================
+
+// function linearSearch(arr,num){
+//     for(let i=0; i< arr.length; i++){
+//         if(arr[i] === num){
+//             return i;
+//         }
+//     }
+// }
+
+// let result = linearSearch([10, 20, 30, 40], 20)
+// console.log(result)
+
+
+
+// ================================== Binary Search ( Time: O(logn) ) ===========================================
+
+// function bonarySearch(arr, num){
+//     let left = 0;
+//     let right = arr.length - 1;
+//     // console.log(mid)
+//     while(left <= right){
+//     let mid = Math.floor((left + right)/2);
+//     if(arr[mid] < num){
+//         left = mid + 1;
+//     }else if(arr[mid] === num){
+//         return mid;
+//     }else{
+//         right = mid -1;
+//     }
+// }
+// }
+
+// let result = bonarySearch([10, 20, 30, 40, 50, 60, 70], 20);
+// console.log(result)
+
+
+// ============================================================  Bubble Sort ( Time: O(n² )  ==================================================
+
+// function bubbleSort(arr){
+//     for(let i=0; i< arr.length -1 ;i++){
+//         for(let j=0; j< arr.length-1-i; j++ ){
+//             if(arr[j]> arr[j+1]){
+//                 let temp = arr[j];
+//                 arr[j] = arr[j+1];
+//                 arr[j+1] = temp;
+//             }
+//         }
+//     }
+//     return arr
+// }
+
+// let arr = [5, 3, 8, 4, 2];
+// console.log(bubbleSort(arr));
+
+
+// ================================================ Selection Sort ======================================
+
+// function selectionSort(arr){
+ 
+//   for(let i=0; i<=arr.length;i++){
+//     let min=i;
+//     for(let j=i+1;j<= arr.length -1; j++){
+//       if(arr[min] > arr[j]){
+//         let temp = arr[min];
+//         arr[min] =arr[j];
+//         arr[j] = temp;
+//       }
+//     }
+//   }
+//   console.log(arr)
+// }
+
+// let arr = [5, 3, 8, 4, 2];
+// selectionSort(arr)
+
+
+// ====================================== Insertion Sort (doubt) ============================
+
+
+// function insertionSort(arr) {
+//     for (let i = 1; i < arr.length; i++) {
+//         let key = arr[i];
+//         let j = i - 1;
+
+//         while (j >= 0 && arr[j] > key) {
+//             arr[j + 1] = arr[j];
+//             j--;
+//         }
+
+//         arr[j + 1] = key;
+//         console.log(arr)
+//     }
+
+//     // return arr;
+// }
+
+// console.log(insertionSort([5, 3, 8, 1, 2]));
+
+
+
+// ======================================  Find missing number ===========================
+// function findMissingNum(arr){
+// for(let i=0; i<=arr.length-2;i++){
+//   // console.log("Hello")1
+//   if(arr[i+1] - arr[i] != 1){
+//     console.log( arr[i]+1)
+//   }
+// }
+// }
+
+// findMissingNum([1, 2,3,4,5,7,8,10])
+
+
+// ============================== find sum of two numbers ===============================
+
+// function findTwoNumSum(arr, num){
+//   for(let i=0; i<arr.length-1;i++){
+//     for(let j=0;j<=arr.length-1;j++){
+//       if(arr[i]+arr[j]===num){
+//         console.log(arr[i],arr[j])
+//       }
+//     }
+//   }
+// }
+
+// findTwoNumSum([2, 7, 11, 15], 9)
+
+
+
+// ======================================== Move all zeros to end =================================
+// function moveZeros(arr) {
+//   let index=0;
+//   for(let num of arr){
+//     if(num !== 0){
+//       arr[index] = num;
+//       index++;
+//     }
+//   }
+// while(index< arr.length){
+//   arr[index]=0;
+//   index++;
+// }
+// return arr;
+// }
+// console.log(moveZeros([0, 1, 0, 3, 12]));
+
+
+// ================================ Rotate Array ===================================

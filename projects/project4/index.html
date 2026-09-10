@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="./src/output.css" rel="stylesheet">
+</head>
+<body>
+    
+ <div class="w-screen bg-green-500">
+    <div>
+        <h2>Day</h2>
+        <h2>9/8</h2>
+    </div>
+ </div>
+
+
+
+
+    <!-- <script>
+        let btn = document.querySelector(".btn");
+
+        // btn.addEventListener("click", apiData);
+        btn.addEventListener("click", apiData);
+
+        document.addEventListener("DOMContentLoaded", () => {
+    apiData ();
+});
+
+        async function apiData(){
+            console.log("api called")
+            let url = "https://geocoding-api.open-meteo.com/v1/search?name=Delhi&count=1&language=en&format=json"
+            let url2 = "https://api.open-meteo.com/v1/forecast?latitude=28.61,23.25,26.91,30.32,25.59,22.57,20.27,19.07&longitude=77.21,77.41,75.78,78.03,85.14,88.36,85.82,72.88&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m";
+            let url3 = "https://www.accuweather.com/en/in/new-delhi/187745/current-weather/187745"
+            let response = await fetch(url2);
+            
+            let data = await response.json();
+            console.log(data)
+        }
+
+        
+    </script> -->
+</body>
+</html>
