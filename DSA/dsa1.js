@@ -236,7 +236,7 @@
 //   arr2.sort((a,b)=>{return a-b});
 //   if (arr1.length !== arr2.length) {
 //     return false;
-//   } 
+//   }
 
 //    for(let i=0; i<arr1.length;i++){
 //     if(arr1[i] !== arr2[i]){
@@ -247,7 +247,6 @@
 //   }
 // let result = areEqual([1, 2, 3], [2,3,1]);
 // console.log(result)
-
 
 // ==================================  Linear Search ( Time: O(n) ) ================================
 
@@ -261,8 +260,6 @@
 
 // let result = linearSearch([10, 20, 30, 40], 20)
 // console.log(result)
-
-
 
 // ================================== Binary Search ( Time: O(logn) ) ===========================================
 
@@ -285,7 +282,6 @@
 // let result = bonarySearch([10, 20, 30, 40, 50, 60, 70], 20);
 // console.log(result)
 
-
 // ============================================================  Bubble Sort ( Time: O(n² )  ==================================================
 
 // function bubbleSort(arr){
@@ -304,11 +300,10 @@
 // let arr = [5, 3, 8, 4, 2];
 // console.log(bubbleSort(arr));
 
-
 // ================================================ Selection Sort ======================================
 
 // function selectionSort(arr){
- 
+
 //   for(let i=0; i<=arr.length;i++){
 //     let min=i;
 //     for(let j=i+1;j<= arr.length -1; j++){
@@ -325,9 +320,7 @@
 // let arr = [5, 3, 8, 4, 2];
 // selectionSort(arr)
 
-
 // ====================================== Insertion Sort (doubt) ============================
-
 
 // function insertionSort(arr) {
 //     for (let i = 1; i < arr.length; i++) {
@@ -348,8 +341,6 @@
 
 // console.log(insertionSort([5, 3, 8, 1, 2]));
 
-
-
 // ======================================  Find missing number ===========================
 // function findMissingNum(arr){
 // for(let i=0; i<=arr.length-2;i++){
@@ -361,7 +352,6 @@
 // }
 
 // findMissingNum([1, 2,3,4,5,7,8,10])
-
 
 // ============================== find sum of two numbers ===============================
 
@@ -376,8 +366,6 @@
 // }
 
 // findTwoNumSum([2, 7, 11, 15], 9)
-
-
 
 // ======================================== Move all zeros to end =================================
 // function moveZeros(arr) {
@@ -396,5 +384,33 @@
 // }
 // console.log(moveZeros([0, 1, 0, 3, 12]));
 
-
 // ================================ Rotate Array ===================================
+
+function rotate(arr, num){
+    let newArr = [];
+let length = arr.length;
+let rem=arr.slice(0,num+1)
+let rem1=arr.slice(num+1,length);
+newArr = [...rem1, ...rem]
+console.log(newArr)
+
+}
+
+rotate([1, 2, 3, 4, 5], 2)                  //output: [4, 5, 1, 2, 3]
+
+// =================================== Merge two sorted arrays =================================
+//Method:1
+// function mergeSorted(arr1, arr2) {
+//   let newArr = [];
+//   newArr = [...arr1, ...arr2]
+//   return newArr.sort((a,b)=>a-b);
+// }
+
+//Method:2
+// function mergeSorted(arr1, arr2){
+//     let newArr = [];
+//     newArr=arr1.concat(arr2);
+//     return newArr.sort((a,b)=>a-b)
+// }
+
+// console.log(mergeSorted([1,5, 3], [2, 4, 6])); //output: [ 1, 2, 3, 4, 5, 6 ]
