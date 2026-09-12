@@ -321,6 +321,36 @@
 // selectionSort(arr)
 
 // ====================================== Insertion Sort (doubt) ============================
+// Insertion Sort
+
+// Insertion Sort एक sorting algorithm है जिसमें हम array के elements को एक-एक करके उठाते हैं और उन्हें उनके सही position पर insert करते हैं।
+
+// इसे ऐसे समझें जैसे हम playing cards को हाथ में sort करते हैं। हम एक नया card लेते हैं और उसे पहले से sorted cards के बीच सही जगह पर लगा देते हैं।
+// Example
+// let arr = [5, 3, 4, 1, 2];
+
+// हम मानते हैं कि पहला element already sorted है:
+
+// [5] 3 4 1 2
+
+// अब 3 को सही position पर डालेंगे:
+
+// [3, 5] 4 1 2
+
+// अब 4:
+
+// [3, 4, 5] 1 2
+
+// अब 1:
+
+// [1, 3, 4, 5] 2
+
+// अब 2:
+
+// [1, 2, 3, 4, 5]
+
+       
+
 
 // function insertionSort(arr) {
 //     for (let i = 1; i < arr.length; i++) {
@@ -383,23 +413,23 @@
 // return arr;
 // }
 // console.log(moveZeros([0, 1, 0, 3, 12]));
-
+ 
 // ================================ Rotate Array ===================================
 
-function rotate(arr, num){
-    let newArr = [];
-let length = arr.length;
-let rem=arr.slice(0,num+1)
-let rem1=arr.slice(num+1,length);
-newArr = [...rem1, ...rem]
-console.log(newArr)
+// function rotate(arr, num){
+//     let newArr = [];
+// let length = arr.length;
+// let rem=arr.slice(0,num+1)
+// let rem1=arr.slice(num+1,length);
+// newArr = [...rem1, ...rem]
+// console.log(newArr)
 
-}
+// }
 
-rotate([1, 2, 3, 4, 5], 2)                  //output: [4, 5, 1, 2, 3]
+// rotate([1, 2, 3, 4, 5], 2)                  //output: [4, 5, 1, 2, 3]
 
 // =================================== Merge two sorted arrays =================================
-//Method:1
+//Method:11
 // function mergeSorted(arr1, arr2) {
 //   let newArr = [];
 //   newArr = [...arr1, ...arr2]
@@ -414,3 +444,118 @@ rotate([1, 2, 3, 4, 5], 2)                  //output: [4, 5, 1, 2, 3]
 // }
 
 // console.log(mergeSorted([1,5, 3], [2, 4, 6])); //output: [ 1, 2, 3, 4, 5, 6 ]
+
+
+
+
+// ======================================= 🟠 Level 3: String & Sliding Window — 26 to 35 ================
+
+// =================================  26. Anagram check  =========================
+// Anagram क्या है?
+
+// Anagram एक ऐसा word या string होता है जिसमें किसी दूसरे word के सभी characters को rearrange करके नया word/string बनाया जाता है।
+
+// Example
+// listen
+// silent
+
+// function isAnagram(str1, str2){
+//     if(str1.length !== str2.length){
+//         return false
+//     }
+//     let newObj = {};
+//     for(let letter of str1){
+//         console.log(letter)
+//        let sub= str2.includes(letter)
+//         if(!sub){
+//             return false;
+//         }
+//     }
+//     return true
+// }
+
+// const result = isAnagram("saas", "asas");
+// console.log(result)
+
+
+
+// ==========================  27. First non-repeating character ============================
+// console.log(firstUnique("aabbcdd"));                    output:  c
+
+// function firstUnique(str){
+//     let obj = {};
+//     for(let letter of str){
+//         obj[letter] = (obj[letter] || 0) +1;
+//     }
+//     for(let key in obj){
+//         if(obj[key] === 1){
+//             return key;
+//         }
+//     }
+// }
+
+// console.log(firstUnique("aabbcdd"));
+
+
+// ============================  28. Character frequency  ===============================
+// Input: "sandeep"                    output: { s: 1, a: 1, n: 1, d: 1, e: 2, p: 1 }
+
+// function charectorFrequency(str){
+//     let obj = {};
+//     for(let letter of str){
+//         obj[letter] = (obj[letter] || 0) +1;
+//     }
+//     return obj;
+// }
+
+// console.log(charectorFrequency("sandeep"))
+
+
+// ======================================= 29. Longest word in a sentence ==================
+// input:   "I am learning JavaScript"                     output: "JavaScript"
+
+// function longestWord(str){
+//     let newStr = str.split(" ");
+//     // console.log(newStr)
+//     let maxIndex=0;
+    
+//     let max=0;
+//     for(let i=0;i< newStr.length; i++){
+//         let length = newStr[i].length;
+//         // console.log(newStr[i],max, length)
+
+//         if(max < length){
+//             max = length;
+//             maxIndex = i;
+//         }
+//         // console.log(newStr[i],maxIndex )
+//     }
+//     return newStr[maxIndex];
+// }
+
+// console.log(longestWord("I am learning JavaScript"));
+
+
+// =======================================  30. Remove duplicate characters ======================
+// programming => progamin
+
+// Method:1
+function remDupChar(str){
+    let result = "";
+    for(let char of str){
+        // console.log(char)
+        if(!result.includes(char)){
+            result = result + char;
+            
+            console.log(result)
+        }
+    }
+}
+
+
+// method:2
+// function remDupChar(str){
+// console.log([...new Set(str)].join(""))
+// }
+
+remDupChar("saam")
