@@ -540,17 +540,15 @@
 // programming => progamin
 
 // Method:1
-function remDupChar(str){
-    let result = "";
-    for(let char of str){
-        // console.log(char)
-        if(!result.includes(char)){
-            result = result + char;
-            
-            console.log(result)
-        }
-    }
-}
+// function remDupChar(str){
+//     let result = "";
+//     for(let char of str){
+//         if(!result.includes(char)){
+//             result = result + char; 
+//         }
+//     }
+//     console.log(result)
+// }
 
 
 // method:2
@@ -558,4 +556,23 @@ function remDupChar(str){
 // console.log([...new Set(str)].join(""))
 // }
 
-remDupChar("saam")
+// remDupChar("saam")
+
+
+// =========================  31. Maximum subarray sum — Kadane's Algorithm ================
+// [1,2,3,4,5]    []
+
+function sumOfSUbArr(arr){
+    for(let start=0;start < arr.length; start++){
+        let last=0;
+        let sum;
+        for(let end=0;end <=start; end++){
+             sum = arr[start] + arr[end];
+             console.log(sum)
+            last++;
+        }
+    }
+}
+
+sumOfSUbArr([1,2,3,4,5])
+
