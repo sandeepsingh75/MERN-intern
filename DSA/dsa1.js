@@ -559,20 +559,20 @@
 // remDupChar("saam")
 
 
-// =========================  31. Maximum subarray sum — Kadane's Algorithm ================
-// [1,2,3,4,5]    []
 
-function sumOfSUbArr(arr){
-    for(let start=0;start < arr.length; start++){
-        let last=0;
-        let sum;
-        for(let end=0;end <=start; end++){
-             sum = arr[start] + arr[end];
-             console.log(sum)
-            last++;
-        }
-    }
+// ============================  31. Maximum subarray sum — Kadane's Algorithm  ==============
+
+function maxSubArray(arr) {
+  let current = arr[0];
+  let max = arr[0];
+
+  for (let i = 1; i < arr.length; i++) {
+    current = Math.max(arr[i], current + arr[i]);
+    max = Math.max(max, current);
+    console.log("current:",current," max:",max," i:", i)
+  }
+
+  return max;
 }
-
-sumOfSUbArr([1,2,3,4,5])
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1]));
 
