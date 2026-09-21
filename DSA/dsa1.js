@@ -562,17 +562,44 @@
 
 // ============================  31. Maximum subarray sum — Kadane's Algorithm  ==============
 
-function maxSubArray(arr) {
-  let current = arr[0];
-  let max = arr[0];
+// function maxSubArray(arr) {
+//   let current = arr[0];
+//   let max = arr[0];
 
-  for (let i = 1; i < arr.length; i++) {
-    current = Math.max(arr[i], current + arr[i]);
-    max = Math.max(max, current);
-    console.log("current:",current," max:",max," i:", i)
+//   for (let i = 1; i < arr.length; i++) {
+//     current = Math.max(arr[i], current + arr[i]);
+//     max = Math.max(max, current);
+//     // console.log("current:",current," max:",max," i:", i)
+//   }
+
+//   return max;
+// }
+// console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1]));
+
+// ================================= 32. Best time to buy and sell stock ==================
+// [7,1,5,3,6,4]  => profit= 5 (max)
+
+// const maxProfit = (arr) => {
+//  let maxProfit = 0;
+//   for(let i=0; i< arr.length; i++){
+//     for(let j=i+1; j<arr.length;j++){
+//       const diff = arr[j]-arr[i];
+//       if(diff>maxProfit){
+//         maxProfit=diff;
+//       }
+//     }
+//   }
+//   return maxProfit
+// }
+
+function maxProfit(arr){
+  
+  let min=0;
+  // let max=arr[0];
+  let profit;
+  for(let i=0; i< arr.length; i++){
+    profit = arr[i] - arr[min];
+    console.log(profit)
   }
-
-  return max;
 }
-console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1]));
-
+console.log(maxProfit([7,1,5,3,6,4]))

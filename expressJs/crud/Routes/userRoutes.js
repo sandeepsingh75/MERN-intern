@@ -7,15 +7,9 @@ const {
   deleteUser,
 } = require("../Controllers/userController");
 const userRouter = express.Router();
-const { body, validationResult } = require("express-validator");
+const { body} = require("express-validator");
 
-userRouter.get("/", usersList);
-
-userRouter.get("/:id", user);
-
-userRouter.post(
-  "/create",
-  [
+const userValidate = [
     body("name")
       .isLength({ min: 3 })
       .withMessage("Please enter a valid name"),
@@ -25,9 +19,13 @@ userRouter.post(
     body("age")
       .isInt({ min: 18 })
       .withMessage("Age must be at least 18"),
-  ],
-  createUser,
-);
+  ];
+
+userRouter.get("/", usersList);
+
+userRouter.get("/:id", user);
+
+userRouter.post("/create", userValidate, createUser );
 
 userRouter.put("/:id", replaceUserData);
 
