@@ -43,17 +43,15 @@
 // const result=sumZero([-5,-4,-3,-2,0,2,4,6,8]);
 // console.log(result)
 
-// --------------------------------- 3. Find Unique Number --------------------------------
+// --------------------------------- 3. Find Unique Number's array(How many) --------------------------------
 
 // function uniqueNumber(arr){
-//     console.log(arr)
-//     if(arr.length){
+//     if(arr.length>0){
 //         let i=0;
 //         for(let j=1;j<arr.length;j++){
 //             if(arr[i]!== arr[j]){
 //                 i++;
 //                 arr[i]=arr[j];
-
 //             }
 //         }
 //         return i+1;
@@ -61,8 +59,30 @@
 //         throw new Error('empty array')
 //     }
 // }
-// let result = uniqueNumber([1,1,2,3,3,4,4,5,6,7,7,8])
+// let result = uniqueNumber([1,1,2,3,3,4,4,5,6,7,7,8,8])
 // console.log(result)
+
+// function uniqueNumber(arr) {
+//   if (arr.length > 0) {
+//     let i = 0;
+//     for (let j = 0; j < arr.length; j++) {
+//     //   console.log(`arr[i]:${arr[i]}, arr[j]:${arr[j]}`);
+//       if (arr[i] !== arr[j]) {
+//         i++;
+//         arr[i] = arr[j];
+//       } else {
+//         j++;
+//       }
+//       return i+1;
+//     }
+//   }else{
+//     return false;
+//   }
+
+//   console.log(arr);
+// }
+
+// let result = uniqueNumber([1, 1, 2, 3, 3, 4, 4, 5, 6, 7, 7, 8]);
 
 // -------------------------------------- Next Problem -----------------------------------------------
 // [1,2,3,4,3,5,4,6,7,8]  => total element
@@ -227,12 +247,98 @@
 
 // console.log(sortArray(arr));
 
-
 // ========================================= Second Method ===========================
-// sort the array by recursion method
-// let arr = [2, 3, 1, 4];
+
+// =========================== String Anagram ======================================
+// "listen" => "silent"      dono string ki length barabar, letter bhi same hai unki arrangement alag ho
+
+// function checkAnagram(str1, str2){
+//     let obj1 = {};
+//     let obj2 = {};
+
+//     if(str1.lenght !== str2.lenght){
+//         return console.log("Not a anagram number");
+//     }
+
+//     for(let letter1 of str1){
+//         obj1[letter1] = (obj1[letter1] || 0) + 1;
+//     }
+
+//     for(let letter2 of str2){
+//         // obj2[letter2] = (obj2[letter2] || 0) + 1;
+//         if(!obj1[letter2]){
+//             return false;
+//         }
+//     }
+//     return true;
+
+//     // console.log(obj2)
+
+// }
+
+// const result = checkAnagram("listen","silent");
+// console.log(result)
+
+// ============= count largest sum of consecutive digit =================================
+// [1,2,3,4,3,5,4,6,7,8]
+// num=4
+// sum => 25
+
+// function findLargestSum(arr, num) {
+//   if (arr < num) {
+//     return false;
+//   }
+//   let maxSum = 0;
+//   let sum = 0;
+//   let newNum = num;
+//   for (let i = 0; i < arr.length - num +1; i++) { 
+//     for(let j=0;j< num;j++){
+//       sum = sum +arr[i+j];
+//     }
+//     if(sum > maxSum){
+//       maxSum = sum;
+//       sum=0;
+//     }
+//   }
+//   return maxSum
+// }
+
+// console.log(findLargestSum([1, 2, 3, 4, 3, 5, 4, 6, 7, 8], 4));
 
 
+//================================ Divide & Conquerer Technique=============================
+// =======================Find the index of given no in a sorted array 7 ==================
+  // [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]=> index 6 => output
+
+// function findIndex(arr, num){
+  
+//   let left = 0;
+//   let right = arr.length -1;
+//   for(let i=0; i< arr.length; i++){
+//    let mid = Math.floor((left + right)/2);
+//     if(num < arr[mid]){
+//      right= mid -1;
+//     }else if(num>arr[mid]){
+//       left = mid +1;
+//     }else{
+//       return mid;
+//     }
+//   }
+// }
+// console.log(findIndex([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], 7))
 
 
+// =============================checking square in another array==========================
+// arr1=[1,2,3,4],  arr2 = [1,9, 4, 16]
 
+// function checkingSquare(arr1, arr2){
+// for(let i=0; i<arr1.length; i++){
+//   let square = arr1[i] * arr1[i];
+//   if(!arr2.includes(square)){
+//     return false;
+//   }
+// }
+// return true;
+// }
+// const result = checkingSquare([1,2,3,4], [1,9,4,16])
+// console.log(result)

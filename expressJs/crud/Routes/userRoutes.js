@@ -5,9 +5,10 @@ const {
   user,
   replaceUserData,
   deleteUser,
+  userLogin,
 } = require("../Controllers/userController");
 const userRouter = express.Router();
-const { body} = require("express-validator");
+const { body } = require("express-validator");
 
 const userValidate = [
     body("name")
@@ -16,22 +17,23 @@ const userValidate = [
     body("email")
       .isEmail()
       .withMessage("Please enter a valid email"),
-    body("age")
-      .isInt({ min: 18 })
-      .withMessage("Age must be at least 18"),
+    body("password")
+      .isString()
+      .withMessage("Password must be text")
+      .isLength({ min: 5 })
+      .withMessage("Password must be at least 5 characters"),
   ];
 
 userRouter.get("/", usersList);
 
 userRouter.get("/:id", user);
 
+userRouter.post("/login", userLogin);
+
+// userRouter.post("/create", userValidate, createUser );
 userRouter.post("/create", userValidate, createUser );
 
 userRouter.put("/:id", replaceUserData);
-
-userRouter.patch("/:id", (req, res) => {
-  res.json({ message: "all fields updated" });
-});
 
 userRouter.delete("/:id", deleteUser);
 
