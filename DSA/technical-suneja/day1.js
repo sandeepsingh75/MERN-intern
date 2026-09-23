@@ -342,3 +342,32 @@
 // }
 // const result = checkingSquare([1,2,3,4], [1,9,4,16])
 // console.log(result)
+
+
+// ================================== 
+
+// function checkingSquare(arr1, arr2){
+//   let obj1={};
+//   let obj2={};
+
+//   for(let num1 of arr1){
+//     obj1[num1] = (obj1[num1] || 0) +1;
+//   }
+//   for(let num2 of arr2){
+//     obj2[num2] = (obj2[num2] || 0) +1;
+//   }
+//   console.log(obj1, obj2)
+//   for(let key in obj1){
+//     console.log(key)
+//     if(!obj2[key * key]){
+//       return false;
+//     }
+//     if(obj1[key] !== obj2[key*key]){
+//       return false ;
+//     }
+//   }
+//   return true
+// }
+
+// const result = checkingSquare([1,2,3,4], [1,9,4,16])
+// console.log(result)

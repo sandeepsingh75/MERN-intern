@@ -50,9 +50,7 @@ const createUser = async (req, res) => {
 
 // ============================== Login User ============================
 const userLogin = async (req, res)=>{
-    console.log("login api called")
     try{
-
         const {email, password} = req.body;
         if(!email || !password){
         return res.status(400).json({
