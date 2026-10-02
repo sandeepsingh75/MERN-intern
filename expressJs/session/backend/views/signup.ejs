@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    signup page
+    Name:<%= name  %>
+
+    <form method="post" action="http://127.0.0.1:5000/users/signup">
+        <input type="text", placeholder="Please enter your name" name="name"/> <br><br>
+        <input type="text", placeholder="Please enter your email" name="email"/> <br><br>
+        <input type="text", placeholder="Please enter your password" name="password"/> <br><br>
+        <input type="submit" value="submit" />
+    </form>
+</body>
+</html>

@@ -2,6 +2,8 @@
 // [-5,-4,-3,-2,0,2,4,6,8]
 // [?,?]
 
+const { time } = require("node:console")
+
 // -------------------------first method -------------------
 // function sumZero(arr){
 // const arrLen= arr.length;
@@ -371,3 +373,182 @@
 
 // const result = checkingSquare([1,2,3,4], [1,9,4,16])
 // console.log(result)
+
+
+// ======================== 9. 10. Problem    ==================================================
+//Recursion: when function call itself.
+// otherwise it will get called for infinite time
+// if a function itself then there must be an end point
+
+// ===================================== 10. Sorting  usingh recursive function ===================
+// [2,4,1,3]
+
+// let a=0;
+// function sorting(arr){
+//   console.log("a:",a)
+
+//   if(a === 4){
+//     return console.log(arr)
+//   }
+//   for(let i=0;i<arr.length;i++){
+//     if(arr[a]<arr[i]){
+//       [arr[i],arr[a]] = [arr[a],arr[i]]
+//     }
+//     console.log(arr[i])
+//   }
+//   a++;
+//   sorting(arr)
+// }
+
+// sorting([2,4,1,3])
+
+
+// ===================== 12. helper recursive function ===========
+// [1,2,3,4,5,6,7,8,9,10] 
+// output => [1,3,5,7,9]
+
+// function oddNumbers(arr){
+//   let newArr = [];
+//   console.log("arr1",arr)
+//   function helperRecursive(array){
+//    if(array.length === 0){
+//     return;
+//    }
+//    if(array[0] % 2 !== 0){
+//     newArr.push(array[0]);
+//    }
+   
+
+//   helperRecursive(array.slice(1));
+//   }
+//   console.log("arr2",arr)
+//   helperRecursive(arr)
+//   return newArr;
+// }
+
+// console.log(oddNumbers([1,2,3,4,5,6,7,8,9,10]))
+
+
+
+// ======================== 15. Bubble sort ===================================
+
+// function bubbleSort(arr){
+//   for(let i= arr.length; i>0; i--){
+//     for(let j=0; j<i;j++){
+//       if(arr[j]>arr[j+1]){
+//         [arr[j],arr[j+1]] = [arr[j+1],arr[j]];
+//       }
+//     }
+//   }
+//   console.log(arr)
+// }
+
+// bubbleSort([5,3,4,1,2,8,6,7])
+
+
+// ================== 16. Bubble sort ===============
+
+// function bubbleSort(arr){
+//   let isSwapped;
+//   for(let i= arr.length; i>0; i--){
+//     for(let j=0; j<i-1;j++){
+//       if(arr[j]>arr[j+1]){
+//         [arr[j],arr[j+1]] = [arr[j+1],arr[j]];
+//         console.log("j",j)
+//         isSwapped=true;
+//       }
+//     }
+//     if(!isSwapped){
+//       break; 
+//     }
+//   }
+//   return arr
+// }
+// console.log(bubbleSort([8,1,2,3,4,5,6,7]))
+
+
+
+// ======================= 17. Selection sort  ============================================
+// [0,2,34,22,10,19]
+
+// First Method
+// function selectionSort(arr){
+//   for(let i=0; i< arr.length; i++){
+//     // let min=arr[0];
+//     for(let j=i+1;j<arr.length;j++){
+//       if(arr[i] > arr[j]){
+//         [arr[i], arr[j]] =[arr[j], arr[i]];
+//       }
+//     }
+//   }
+//   console.log(arr)
+// }
+
+// Second Method
+
+// function selectionSort(arr){
+//   for(let i=0; i< arr.length; i++){
+//     let min=i;
+//     for(let j=i+1;j<arr.length;j++){
+//       if(arr[min] > arr[j])
+//         min = j;
+//     }
+//     if(i !== min){
+//       [arr[i],arr[min]] = [arr[min],arr[i]] 
+//     }
+//   }
+//   console.log(arr)
+// }
+// selectionSort([0,2,34,22,10,19])
+
+
+// =================== 18. Insertion sort ========================================
+
+// function insertionSort(arr){
+//   // console.log("arr",arr)
+//   for(let i=0;i<arr.length;i++){
+//     let curr = arr[i];
+//     let j= i-1;
+//     while(j>=0 && arr[j]> curr){
+//       arr[j+1] = arr[j];
+//       j--
+//     }
+//     arr[j+1]=curr;
+//   }
+//   console.log(arr)
+// }
+
+// insertionSort([8,2,4,1,3])
+
+
+
+// ==============  Longest substring without repeating character ====================
+
+// function lengthOfLongestString(str){
+
+//   let start =0;
+//   let end = 0;
+//   let maxLength = 0;
+//   let uniqueCharecters = new Set();
+//   // console.log(uniqueCharecters.has(str[end]))
+//   while(end < str.length){
+//     if(!uniqueCharecters.has(str[end])){
+//       uniqueCharecters.add(str[end]);
+//       end++;
+//       maxLength = Math.max(maxLength, uniqueCharecters.size);
+//     }else{
+//       uniqueCharecters.delete(str[end]);
+//       start++;
+//     }
+//   }
+//   return maxLength
+// }
+
+// let res = lengthOfLongestString("abcabcbb")
+// console.log(res)
+
+function longestString(str){
+  
+}
+
+longestString("abcabcbb")

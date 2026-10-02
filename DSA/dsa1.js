@@ -349,9 +349,6 @@
 
 // [1, 2, 3, 4, 5]
 
-       
-
-
 // function insertionSort(arr) {
 //     for (let i = 1; i < arr.length; i++) {
 //         let key = arr[i];
@@ -413,7 +410,7 @@
 // return arr;
 // }
 // console.log(moveZeros([0, 1, 0, 3, 12]));
- 
+
 // ================================ Rotate Array ===================================
 
 // function rotate(arr, num){
@@ -445,9 +442,6 @@
 
 // console.log(mergeSorted([1,5, 3], [2, 4, 6])); //output: [ 1, 2, 3, 4, 5, 6 ]
 
-
-
-
 // ======================================= 🟠 Level 3: String & Sliding Window — 26 to 35 ================
 
 // =================================  26. Anagram check  =========================
@@ -477,8 +471,6 @@
 // const result = isAnagram("saas", "asas");
 // console.log(result)
 
-
-
 // ==========================  27. First non-repeating character ============================
 // console.log(firstUnique("aabbcdd"));                    output:  c
 
@@ -496,7 +488,6 @@
 
 // console.log(firstUnique("aabbcdd"));
 
-
 // ============================  28. Character frequency  ===============================
 // Input: "sandeep"                    output: { s: 1, a: 1, n: 1, d: 1, e: 2, p: 1 }
 
@@ -510,7 +501,6 @@
 
 // console.log(charectorFrequency("sandeep"))
 
-
 // ======================================= 29. Longest word in a sentence ==================
 // input:   "I am learning JavaScript"                     output: "JavaScript"
 
@@ -518,7 +508,7 @@
 //     let newStr = str.split(" ");
 //     // console.log(newStr)
 //     let maxIndex=0;
-    
+
 //     let max=0;
 //     for(let i=0;i< newStr.length; i++){
 //         let length = newStr[i].length;
@@ -535,7 +525,6 @@
 
 // console.log(longestWord("I am learning JavaScript"));
 
-
 // =======================================  30. Remove duplicate characters ======================
 // programming => progamin
 
@@ -544,12 +533,11 @@
 //     let result = "";
 //     for(let char of str){
 //         if(!result.includes(char)){
-//             result = result + char; 
+//             result = result + char;
 //         }
 //     }
 //     console.log(result)
 // }
-
 
 // method:2
 // function remDupChar(str){
@@ -557,8 +545,6 @@
 // }
 
 // remDupChar("saam")
-
-
 
 // ============================  31. Maximum subarray sum — Kadane's Algorithm  ==============
 
@@ -592,14 +578,33 @@
 //   return maxProfit
 // }
 
-function maxProfit(arr){
-  
-  let min=0;
-  // let max=arr[0];
-  let profit;
-  for(let i=0; i< arr.length; i++){
-    profit = arr[i] - arr[min];
-    console.log(profit)
+// function maxProfit(arr){
+
+//   let min=0;
+//   // let max=arr[0];
+//   let profit;
+//   for(let i=0; i< arr.length; i++){
+//     profit = arr[i] - arr[min];
+//     console.log(profit)
+//   }
+// }
+// console.log(maxProfit([7,1,5,3,6,4]))
+
+// ===================== maximum subarray sum (kadan's law) ========================
+
+function maxSubArray(arr) {
+  let maxSum = arr[0];
+  for (let i = 0; i < arr.lengh; i++) {
+    let currentSum = 0;
+    for (let j = i; j < arr.length; j++) {
+      currentSum = currentSum + arr[j];
+      if (currentSum > maxSum) {
+        maxSum = currentSum;
+      }
+    }
   }
+  return maxSum;
 }
-console.log(maxProfit([7,1,5,3,6,4]))
+
+// console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1]));
+console.log(maxSubArray([5,4,-1,7,8]));
