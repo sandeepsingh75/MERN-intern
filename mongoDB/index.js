@@ -333,4 +333,145 @@ db.users.updateOne(
 
 // ====================== Projection in MongoDB =========================
 // Show only Selected Fields
-db.users.find()
+db.users.find({},{name:1, email:1, _id:0})  // Show only the name and email fields, and exclude the _id field from the results.
+
+
+// ===================== Aggregation in MongoDB =========================
+// Aggregation is a way of processing a large number of documents in a collection by means of passing them through different stages. The stages make up what is known as a pipeline.
+db.products.aggregate([
+    {$match:{rating:{$gt:4}}},  // Stage 1: Filter documents with rating greater than 4
+])
+
+db.products.aggregate([
+    {$match:{ productName: 'Mechanical Keyboard'}},  // Stage 1: Filter documents with rating greater than 4
+])
+
+db.products.aggregate([
+    {$match:{ "reviews.rating": {$gt: 4}, price:{$gt:3000} }},  // Stage 1: Filter documents with rating greater than 4
+])
+
+db.products.aggregate([
+    {$match:{ $and:[
+        {"reviews.rating": {$gt: 4}},
+        {price:{$gt:3000}}
+    ]}}
+])
+
+
+// $exists operator in MongoDB is used to check whether a field exists or not in the documents of a collection. It can be used in queries to filter documents based on the presence or absence of a specific field.
+db.products.aggregate([
+    {$match:{price:{$exists:true}}}
+])
+
+// $regex operator in MongoDB is used to perform pattern matching on string fields. It allows you to search for documents that match a specific regular expression pattern.
+db.products.aggregate([
+    {$match:{productName:{$regex:/Keyboard/}}}
+])
+
+
+//  $project operator in MongoDB is used to reshape the documents in the aggregation pipeline. It allows you to include, exclude, or rename fields in the output documents.
+// get specific fields from the documents and exclude the _id field from the output.
+db.products.aggregate([
+    {$project:{productName:1, price:1, _id:0}}
+])
+
+// rename a field in the output documents. In this case, we are renaming the "price" field to "productPrice" while keeping the "productName" field and excluding the "_id" field.
+db.products.aggregate([
+    {$project:{productName:1, productPrice:"$price", _id:0 }}
+])
+
+// Add new field to the output documents. In this case, we are adding a new field called "discountedPrice" which is calculated by multiplying the "price" field by 0.9 (10% discount).
+
+db.products.aggregate([
+    {$match:{price:{$gt:3000}}},
+    {$project:{productName:1, productPrice:"$price", totalPrice:{$multiply:["$price", "$quantity"]}, _id:0 }}
+])  
+
+// $concat operator in MongoDB is used to concatenate multiple strings together. It can be used in the aggregation pipeline to create new string fields by combining existing string fields or literal strings.
+
+reviews: [
+  { username: "Aakash", comment: "Good", rating: 4 },
+  { username: "Rahul", comment: "Nice", rating: 5 }
+]
+
+db.products.aggregate([
+  {
+    $match: {
+      price: { $gt: 3000 }
+    }
+  },
+  {
+    $project: {
+      productName: 1,
+      productPrice: "$price",
+      reviews: 1,
+      greeting: {
+        $concat: [
+          "Welcome to ",
+          { $arrayElemAt: ["$reviews.username", 0] }
+        ]
+      }
+    }
+  }
+])      
+
+
+// ===================  $group stage ==================
+// $group stage in MongoDB's aggregation framework is used to group documents together based on a specified field or expression. It allows you to perform various aggregation operations on the grouped data, such as calculating sums, averages, counts, and more.
+
+//$sum operator in MongoDB's aggregation framework is used to calculate the sum of numeric values for a specified field or expression within a group of documents. It is commonly used in conjunction with the $group stage to aggregate data based on certain criteria.
+db.items.aggregate([
+  {$group: {
+      _id: "$category",
+      totalPrice:{$sum:'$price'},
+      totalQuantity:{$sum:'$quantity'}
+  }
+}
+])      
+
+// $max and $min operators in MongoDB's aggregation framework are used to find the maximum and minimum values for a specified field or expression within a group of documents. They are commonly used in conjunction with the $group stage to aggregate data based on certain criteria.
+
+db.items.aggregate([
+    {$group:{
+        _id:"$category",
+        maxPrice:{$max:'$price'},
+        minPrice:{$min:'$price'}
+    }}
+])
+
+// $first and $last operators 
+
+db.items.aggregate([
+    {$sort:{price:1}},
+    {
+        $group:{
+            _id:"$category",
+            firstPrice:{$first:"$price"},
+            lastPrice:{$last:"$price"}
+        }
+    }
+])
+
+
+//  $sum for counting documents (Total orders per Category)
+
+db.items.aggregate([
+    {
+        $group:{
+            _id:"$category",
+            totalOrders:{$sum:1}
+        }
+    }
+])
+
+
+//  $push - Collect All Prices in an array
+
+db.items.aggregate([
+    {
+        $group:{
+            _id:"category",
+            allPrices:{$push:"$price"}
+        }
+    }
+])

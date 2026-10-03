@@ -55,7 +55,6 @@ const products = [
       }
     ]
   },
-
   {
     productName: "Mechanical Keyboard",
     quantity: 35,
@@ -189,3 +188,66 @@ const products = [
     ]
   }
 ];
+
+const products = [
+  {
+    productName: "Bluetooth Speaker",
+    category: "Electronics",
+    price: 3500,
+    quantity: 35
+  },
+  {
+    productName: "Laptop",
+    category: "Electronics",
+    price: 55000,
+    quantity: 10
+  },
+  {
+    productName: "Smartphone",
+    category: "Electronics",
+    price: 25000,
+    quantity: 25
+  },
+  {
+    productName: "Headphones",
+    category: "Electronics",
+    price: 2500,
+    quantity: 40
+  },
+  {
+    productName: "T-Shirt",
+    category: "Clothing",
+    price: 799,
+    quantity: 50
+  },
+  {
+    productName: "Jeans",
+    category: "Clothing",
+    price: 1499,
+    quantity: 30
+  },
+  {
+    productName: "Rice",
+    category: "Grocery",
+    price: 1200,
+    quantity: 20
+  },
+  {
+    productName: "Cooking Oil",
+    category: "Grocery",
+    price: 180,
+    quantity: 60
+  },
+  {
+    productName: "Office Chair",
+    category: "Furniture",
+    price: 7500,
+    quantity: 15
+  },
+  {
+    productName: "Study Table",
+    category: "Furniture",
+    price: 6500,
+    quantity: 12
+  }
+]
