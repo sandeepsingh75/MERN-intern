@@ -465,7 +465,7 @@ db.items.aggregate([
 ])
 
 
-//  $push - Collect All Prices in an array
+// ============ $push - Collect All Prices in an array  ==========================
 
 db.items.aggregate([
     {
@@ -475,3 +475,580 @@ db.items.aggregate([
         }
     }
 ])
+
+
+// ==================== $lookup im mongodb ====================
+// users collection
+[
+  {
+    _id: 1,
+    name: "Sandeep",
+    email: "sandeep@gmail.com"
+  },
+  {
+    _id: 2,
+    name: "Aakash",
+    email: "aakash@gmail.com"
+  },
+  {
+    _id: 3,
+    name: "Priya",
+    email: "priya@gmail.com"
+  }
+]
+
+
+// orders collection 
+[
+  {
+    _id: 101,
+    userId: 1,
+    product: "Laptop",
+    price: 50000
+  },
+  {
+    _id: 102,
+    userId: 1,
+    product: "Mouse",
+    price: 1000
+  },
+  {
+    _id: 103,
+    userId: 2,
+    product: "Keyboard",
+    price: 2000
+  }
+]
+/*
+Here:
+
+users._id
+     ↓
+ orders.userId
+
+ These two fields create the relationship. */
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "userId",
+      as: "orders"
+    }
+  }
+])
+
+/*
+Meaning of each property
+$lookup: {
+    from: "orders",
+    localField: "_id",
+    foreignField: "userId",
+    as: "orders"
+}
+Property	Meaning
+from	Collection from which we want data
+localField	Field of current collection
+foreignField	Matching field of from collection
+as	Name of the new array
+
+So:
+
+users._id == orders.userId
+*/
+
+
+
+// ======================== index in mongodb ===============================
+/*
+2. Index Create करना
+
+email पर index बनाने के लिए:
+
+db.users.createIndex({ email: 1 })
+
+यहाँ:
+
+email → जिस field पर index बनाना है
+1 → Ascending index
+
+अब MongoDB email को efficiently search कर सकता है।
+
+3. Descending Index
+db.users.createIndex({ age: -1 })
+
+यहाँ:
+
+1 = Ascending
+-1 = Descending
+*/
+// 4. Index देखना
+
+// Collection के सभी indexes देखने के लिए:
+
+db.users.getIndexes()
+
+// 5. Index की मदद से Query
+
+// अब:
+
+db.users.find({ email: "rahul@gmail.com" })
+
+// इस query में MongoDB email_1 index का उपयोग कर सकता है।
+
+
+
+// $eq operator in mongodb aggregation
+db.items.aggregate(
+    {
+        $project:{
+            result:{
+               $eq: ["$price",3500]
+            }
+        }
+    }
+)
+
+
+// ================== MongoDB Index ====================================
+/*
+Index in mongodb explain with example
+Index in MongoDB Explained with Examples
+1. What is an Index in MongoDB?
+Definition: An index in MongoDB is a special data structure that helps MongoDB find documents faster without scanning every document in a collection.
+
+Think of an index like the index page of a book. If you want to find a particular topic, you check the index instead of reading every page.
+
+Hindi explanation: MongoDB mein index ek special data structure hota hai jo database mein data ko jaldi search karne mein help karta hai.
+
+2. Example without an index
+Suppose we have a users collection containing these documents:
+
+db.users.insertMany([
+  { name: "Amit", age: 25, city: "Delhi" },
+  { name: "Rahul", age: 28, city: "Mumbai" },
+  { name: "Sandeep", age: 27, city: "Khatima" },
+  { name: "Priya", age: 24, city: "Delhi" },
+  { name: "Neha", age: 30, city: "Dehradun" }
+]);
+
+Now, search for a user whose name is "Sandeep".
+
+db.users.find({ name: "Sandeep" });
+
+Without an index on name, MongoDB may need to scan every document to find the matching user. This is called a collection scan (COLLSCAN).
+
+3. Create an index in MongoDB
+To make searching by name faster, create an index:
+
+db.users.createIndex({ name: 1 });
+
+Here:
+
+createIndex() creates an index.
+
+name is the field on which the index is created.
+
+1 means ascending order.
+
+-1 means descending order.
+
+Now search again:
+
+db.users.find({ name: "Sandeep" });
+
+MongoDB can use the index to locate the matching document more efficiently.
+
+How an index works
+Query: Find name = "Sandeep"
+
+Index on name
+
+Locates the matching index entry
+
+Matching document returned
+
+4. Types of indexes in MongoDB
+Here are the important index types you should know for MERN stack interviews.
+
+Index type
+
+Example
+
+Purpose
+
+Single-field
+
+{ age: 1 }
+
+Search using one field
+
+Compound
+
+{ city: 1, age: -1 }
+
+Search using multiple fields
+
+Multikey
+
+{ skills: 1 }
+
+Index an array field
+
+Unique
+
+{ email: 1 }
+
+Prevent duplicate indexed values
+
+Text
+
+{ description: "text" }
+
+Search text content
+
+TTL
+
+{ createdAt: 1 }
+
+Automatically expire documents after a configured time
+
+Hashed
+
+{ userId: "hashed" }
+
+Support hashed-shard key use cases
+
+A. Single-field index
+Creates an index on one field.
+
+db.users.createIndex({ age: 1 });
+
+Query:
+
+db.users.find({ age: 27 });
+
+Useful when frequently searching or sorting by age.
+
+B. Compound index
+Creates an index on multiple fields.
+
+db.users.createIndex({ city: 1, age: -1 });
+
+This index is especially useful for queries such as:
+
+db.users.find({ city: "Delhi" })
+        .sort({ age: -1 });
+
+Important: Compound indexes follow the field order. An index on { city: 1, age: -1 } generally supports queries using city alone and queries using both city and age, but it is not equally effective for queries using only age.
+
+C. Unique index
+Prevents duplicate values in the indexed field.
+
+db.users.createIndex(
+  { email: 1 },
+  { unique: true }
+);
+
+Now MongoDB will reject a second document with the same email value.
+
+This is useful for registration systems where each email must be unique.
+
+D. Multikey index
+Used when the indexed field contains an array.
+
+Example document:
+
+{
+  name: "Sandeep",
+  skills: ["React", "Node.js", "MongoDB"]
+}
+
+Create the index:
+
+db.users.createIndex({ skills: 1 });
+
+Search:
+
+db.users.find({ skills: "React" });
+
+MongoDB can use the multikey index to search for documents containing "React" in their skills array.
+
+5. How to check whether an index is being used
+Use explain() to inspect the query execution plan.
+
+db.users.find({ name: "Sandeep" })
+        .explain("executionStats");
+
+Look for these stages:
+
+IXSCAN — MongoDB scans an index.
+
+COLLSCAN — MongoDB scans the collection.
+
+You can also examine totalDocsExamined and executionTimeMillis to understand query performance. Results depend on the data, indexes, and query planner.
+
+6. Important index commands
+Task
+
+MongoDB command
+
+Create index
+
+db.users.createIndex({ age: 1 })
+
+View all indexes
+
+db.users.getIndexes()
+
+Drop a specific index
+
+db.users.dropIndex("age_1")
+
+Drop all indexes
+
+db.users.dropIndexes()
+
+Create descending index
+
+db.users.createIndex({ age: -1 })
+
+Note: MongoDB automatically creates a unique index on _id. You cannot drop that index while keeping the collection.
+
+7. Advantages and disadvantages
+Advantages
+
+Faster searches for suitable queries.
+
+Can improve sorting and filtering.
+
+Unique indexes help enforce uniqueness.
+
+Can reduce the number of documents examined.
+
+Disadvantages
+
+Indexes consume additional disk space and memory.
+
+Inserts, updates, and deletes can become slower because indexes must also be maintained.
+
+Too many indexes can hurt write performance.
+
+Professional tip: Create indexes on fields frequently used in queries, filters, and sorts. Avoid creating an index on every field without measuring the benefit.
+
+8. Interview question
+Q: What is an index in MongoDB, and why do we use it?
+
+Answer: An index in MongoDB is a data structure that improves query performance by allowing MongoDB to locate documents more efficiently. It reduces the need for full collection scans, but it requires extra storage and maintenance during write operations.
+
+Practice task: Try these commands in MongoDB Shell (mongosh):
+
+Create an index on age.
+
+Display all indexes.
+
+Search for users with age greater than 25.
+
+Use explain("executionStats") to inspect the query plan.
+
+Drop the index you created.
+
+*/
+/*
+
+$lookup in mongoDB with example
+$lookup in MongoDB with Example
+In MongoDB, the $lookup stage is used to join two collections based on a matching field. It is similar to a LEFT OUTER JOIN in SQL.
+
+For example, suppose we have two collections:
+
+users — stores user details.
+
+orders — stores orders placed by users.
+
+We can use $lookup to get each user's details along with their orders.
+
+1. Syntax of $lookup
+{
+  $lookup: {
+    from: "collection2",
+    localField: "fieldInCurrentCollection",
+    foreignField: "fieldInOtherCollection",
+    as: "result"
+  }
+}
+
+Explanation:
+
+Property
+
+Meaning
+
+from
+
+Name of the collection to join
+
+localField
+
+Field from the current collection
+
+foreignField
+
+Field from the other collection
+
+as
+
+Name of the new array that stores matching documents
+
+2. Example: Users and Orders
+Collection 1: users
+
+db.users.insertMany([
+  { _id: 1, name: "Sandeep", city: "Khatima" },
+  { _id: 2, name: "Rahul", city: "Delhi" },
+  { _id: 3, name: "Amit", city: "Dehradun" }
+])
+
+Collection 2: orders
+
+db.orders.insertMany([
+  { _id: 101, userId: 1, product: "Laptop", price: 50000 },
+  { _id: 102, userId: 1, product: "Mouse", price: 500 },
+  { _id: 103, userId: 2, product: "Keyboard", price: 1500 }
+])
+
+Here, users._id matches orders.userId.
+
+3. Use $lookup to join both collections
+Run this query in MongoDB Shell (mongosh):
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "userId",
+      as: "userOrders"
+    }
+  }
+])
+
+Output
+User 1
+
+Sandeep
+
+City: Khatima
+
+userOrders array
+
+Laptop — ₹50,000
+
+Mouse — ₹500
+
+User 2
+
+Rahul
+
+City: Delhi
+
+userOrders array
+
+- Keyboard — ₹1,500
+
+User 3
+
+Amit
+
+City: Dehradun
+
+userOrders: [] — no matching orders
+
+Notice that the matching orders are stored in the userOrders array. Amit is still included because $lookup preserves documents from the input collection even when no matching document exists.
+
+4. $lookup with $unwind
+Sometimes you want each order to appear as a separate document instead of an array.
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "userId",
+      as: "userOrders"
+    }
+  },
+  {
+    $unwind: "$userOrders"
+  }
+])
+
+Now Sandeep appears twice: once for the Laptop and once for the Mouse. Rahul appears once, and Amit disappears because he has no matching orders.
+
+To keep users who have no orders, use:
+
+{
+  $unwind: {
+    path: "$userOrders",
+    preserveNullAndEmptyArrays: true
+  }
+}
+
+5. $lookup with $match and $project
+You can combine $lookup with other aggregation stages to filter and format the result.
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "userId",
+      as: "userOrders"
+    }
+  },
+  {
+    $match: {
+      "userOrders.price": { $gt: 1000 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      city: 1,
+      userOrders: 1
+    }
+  }
+])
+
+This returns users who have at least one order with a price greater than ₹1,000.
+
+6. $lookup vs. Mongoose populate()
+$lookup
+
+populate()
+
+MongoDB aggregation stage
+
+Mongoose method
+
+Used inside aggregate()
+
+Commonly used with find()
+
+Joins documents from collections
+
+Resolves references using Mongoose schemas
+
+Useful for complex aggregation and reporting
+
+Convenient for normal application queries
+
+Interview answer: $lookup is an aggregation stage in MongoDB that performs a left outer join between two collections. It matches documents using localField and foreignField and stores the matching documents in an array specified by as.
+*/
+
+
+
+
+
