@@ -159,7 +159,7 @@ export const userLogin = async (req, res) => {
 
     const matchPass = await bcrypt.compare(password, existingUser.password);
     if (!matchPass) {
-      return res.status(400).json({
+      return res.status(401).json({
         success: false,
         message: "Password doesn't exist",
       });
@@ -177,14 +177,17 @@ export const userLogin = async (req, res) => {
 
     // Generate refresh token
     const refreshToken = jwt.sign(      {
-        userId: existingUser._id,
-        role: existingUser.role,
+        _id: existingUser._id
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
         expiresIn: "7d"
       },
     );
+    // console.log("existingUser:", existingUser)
+    // Save refresh token in database
+    existingUser.refreshToken = refreshToken;
+    await existingUser.save({ validateBeforeSave:false })
 
     // send refresh token in HttpOnly cookie
     res.cookie("refreshToken",refreshToken,
@@ -195,7 +198,7 @@ export const userLogin = async (req, res) => {
         maxAge: 7 * 24 * 60 *60 * 1000,
         path: "/"
       }
-    )
+    );
 
     res.status(200).json({
         success:true,
@@ -215,3 +218,26 @@ export const userLogin = async (req, res) => {
     });
   }
 };
+
+export const refreshAccessToken = async (req, res) =>{
+  const incommingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+
+  if(!incommingRefreshToken){
+    return res.status(401).json({
+      success:false,
+      message:"Unauthorized request"
+    })
+  }
+
+  const decodedToken = jwt.verify(incommingRefreshToken,process.env.REFRESH_TOKEN_SECRET);
+  const user = await userModel.findById(decodedToken?._id);
+
+  if(!user){
+    return res.status(401).json({
+      success:false,
+      message:"Invalid refresh token"
+    })
+  }
+
+  // if(incommingRefreshToken !== )
+}
