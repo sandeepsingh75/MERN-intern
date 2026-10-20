@@ -1,24 +1,29 @@
-import React, { useState } from 'react'
+import { useMemo, useState } from "react";
 
-const ExpensiveCalculation = (num) => {
-  console.log("Calculating...");
-  for (let i = 0; i < 1000000000; i++) {
-    num += 1;
-  }
-  return <p> count:{num} </p>
-};
+function UseMemo() {
+  const [number, setNumber] = useState(1);
+  const [theme, setTheme] = useState("light");
 
+  const squared = useMemo(() => {
+    console.log("Calculating...");
+    return number * number;
+  }, [number]);
 
-
-const UseMemo = () => {
-    const [count, setCount] = useState(0);  
   return (
     <div>
-      <ExpensiveCalculation />
-      <button onClick={()=>setCount(count+1)} >re-render Parent</button>
-      <p> Parent Re-render count: {count} </p>
+      <p>Square: {squared}</p>
+
+      <button onClick={() => setNumber(number + 1)}>
+        Change Number
+      </button>
+
+      <button onClick={() =>
+        setTheme(theme === "light" ? "dark" : "light")
+      }>
+        Change Theme: {theme}
+      </button>
     </div>
-  )
+  );
 }
 
-export default UseMemo
+export default UseMemo;

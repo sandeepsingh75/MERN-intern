@@ -7,12 +7,14 @@ import Orders from './components/Orders'
 import Products from './components/Products'
 import Login from './components/Login'
 import Register from './components/Register'
+import Navbar from './components/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    <Navbar />
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/about' element={<About/>} />

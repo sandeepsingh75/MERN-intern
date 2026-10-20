@@ -1,9 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
     <div>
-      <h1 class="text-xl font-bold underline"> Home page </h1>
+      <h1><Link to="/login" >Login</Link></h1>
+      <h1><Link to="/register" >Register</Link></h1>
+      <h1><Link to="/users" >User List</Link></h1>
     </div>
   )
 }

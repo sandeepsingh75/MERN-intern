@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, deleteUser, getUser, getUsers, updateUser, userLogin } from '../controllers/userController.js';
+import { createUser, deleteUser, getUser, getUsers, refreshAccessToken, updateUser, userLogin } from '../controllers/userController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { authorizeRole } from '../middleware/roleMiddleware.js';
 
@@ -11,6 +11,7 @@ userRouter.post("/create",createUser)
 userRouter.put("/:id",updateUser)
 userRouter.delete("/:id",deleteUser)
 userRouter.post("/login", userLogin)
+userRouter.post("/refresh-token",refreshAccessToken)
 
 
 // Manager Router

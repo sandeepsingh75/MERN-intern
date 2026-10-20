@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 
 export const createUser = async (req, res) => {
   try {
-    const { name, email, password ,role} = req.body;
+    console.log("backend:", req.body);
+    const { name, email, password, role } = req.body;
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
@@ -28,7 +29,7 @@ export const createUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role
+      role,
     });
     if (!user) {
       return res.status(400).json({
@@ -164,53 +165,53 @@ export const userLogin = async (req, res) => {
         message: "Password doesn't exist",
       });
     }
-// Generate access token
-    const accessToken = jwt.sign(      {
+    // Generate access token
+    const accessToken = jwt.sign(
+      {
         userId: existingUser._id,
         role: existingUser.role,
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "15m"
+        expiresIn: "1d",
       },
     );
 
     // Generate refresh token
-    const refreshToken = jwt.sign(      {
-        _id: existingUser._id
+    const refreshToken = jwt.sign(
+      {
+        _id: existingUser._id,
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
-        expiresIn: "7d"
+        expiresIn: "7d",
       },
     );
     // console.log("existingUser:", existingUser)
     // Save refresh token in database
     existingUser.refreshToken = refreshToken;
-    await existingUser.save({ validateBeforeSave:false })
+    await existingUser.save({ validateBeforeSave: false });
 
     // send refresh token in HttpOnly cookie
-    res.cookie("refreshToken",refreshToken,
-      {
-        httpOnly:true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 *60 * 1000,
-        path: "/"
-      }
-    );
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      path: "/",
+    });
 
     res.status(200).json({
-        success:true,
-        message:"User logged in successfully",
-        accessToken,
-        user:{
-            id:existingUser._id,
-            name:existingUser.name,
-            email:existingUser.email,
-            role:existingUser.role,
-        }
-    })
+      success: true,
+      message: "User logged in successfully",
+      accessToken,
+      user: {
+        id: existingUser._id,
+        name: existingUser.name,
+        email: existingUser.email,
+        role: existingUser.role,
+      },
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -219,25 +220,86 @@ export const userLogin = async (req, res) => {
   }
 };
 
-export const refreshAccessToken = async (req, res) =>{
-  const incommingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
-
-  if(!incommingRefreshToken){
+// ================== Re-Generate Access Token ====================
+export const refreshAccessToken = async (req, res) => {
+  const incommingRefreshToken =
+  req?.cookies?.refreshToken || req?.body?.refreshToken;
+  
+  if (!incommingRefreshToken) {
     return res.status(401).json({
-      success:false,
-      message:"Unauthorized request"
-    })
+      success: false,
+      message: "Unauthorized request",
+    });
   }
+  
+  try {
+    // console.log("incommingRefreshToken:",incommingRefreshToken)
+    // console.log("refresh secret:",process.env.REFRESH_TOKEN_SECRET)
+    const decodedToken = jwt.verify(
+      incommingRefreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+    const user = await userModel.findById(decodedToken?._id);
+    console.log("user:",user)
+    
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid refresh token",
+      });
+    }
 
-  const decodedToken = jwt.verify(incommingRefreshToken,process.env.REFRESH_TOKEN_SECRET);
-  const user = await userModel.findById(decodedToken?._id);
+    if (incommingRefreshToken !== user?.refreshToken) {
+      return res.status(401).json({
+        success: false,
+        message: "Refresh token is expired or used",
+      });
+    }
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
 
-  if(!user){
-    return res.status(401).json({
-      success:false,
-      message:"Invalid refresh token"
-    })
+    // Generate access token
+    const accessToken = jwt.sign(
+      {
+        userId: user._id,
+        role: user.role,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: "30m",
+      },
+    );
+
+    // Generate refresh token
+    const newRefreshToken = jwt.sign(
+      {
+        _id: user._id,
+      },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: "7d",
+      },
+    );
+
+    res.cookie("refreshToken", newRefreshToken,options);
+
+    res.status(200).json({
+      success: true,
+      message: "New Access token generated.",
+      accessToken,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
-
-  // if(incommingRefreshToken !== )
-}
+};
