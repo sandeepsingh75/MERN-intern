@@ -1,11 +1,11 @@
+import React from 'react'
 
 const Unauthorized = () => {
   return (
     <div>
-      <h1>403 - Access Denied</h1>
-      <p>You are not authorized to access this page.</p>
+      <h1> 403 Access Denied </h1>
     </div>
-  );
-};
+  )
+}
 
-export default Unauthorized;
+export default Unauthorized

@@ -1,35 +1,33 @@
-
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
 
-  const handleLogin = (role) => {
-    // Demo only: real app mein backend se
-    // verified authentication result use karein
-    localStorage.setItem("token", "demo-token");
-    localStorage.setItem("role", role);
+const handleLogin = (role) =>{
+    // console.log("role:",role)
+    localStorage.setItem("role",role);
+    localStorage.setItem("loggedIn", true);
+if(role === "principle"){
+  <Navigate to="/principle" />
+}else if(role === "sub-principle"){
+  <Navigate to="/sub-principle" />
+}else if(role === "teacher"){
+  <Navigate to="/teacher" />
+}else if(role === "student"){
+  <Navigate to="/student" />
+}
 
-    if (role === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/user");
-    }
-  };
 
+
+}
   return (
-    <div>
-      <h1>Login Page</h1>
-
-      <button onClick={() => handleLogin("admin")}>
-        Admin Login
-      </button>
-
-      <button onClick={() => handleLogin("user")}>
-        User Login
-      </button>
+    <div style={{margin:"10px"}}>
+      <button style={{margin:"0 2px"}} onClick={()=>handleLogin("principle")}>Priciple Login</button>
+      <button style={{margin:"0 2px"}} onClick={()=>handleLogin("sub-principle")}>Sub-Priciple Login</button>
+      <button style={{margin:"0 2px"}} onClick={()=>handleLogin("teacher")}>Teacher Login</button>
+      <button style={{margin:"0 2px"}} onClick={()=>handleLogin("student")}>Student Login</button>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

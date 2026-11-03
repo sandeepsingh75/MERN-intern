@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import useCounter from "./CustomHooks/useCounter.jsx";
 
 const Time = () => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const {count, increment, decrement, reset} = useCounter();
 
   let showTime = () => {
     const d = new Date();
@@ -29,6 +31,12 @@ const Time = () => {
   return (
     <div className="text-3xl font-bold">
       Time:{hours}:{minutes}:{seconds}
+      <div>
+        <h1>count:{count}</h1>
+        <button onClick={increment}>increment</button>
+        <button onClick={decrement}>decrement</button>
+        <button onClick={reset }>reset</button>
+      </div>
     </div>
   );
 };

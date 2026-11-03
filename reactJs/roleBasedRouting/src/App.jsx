@@ -1,37 +1,45 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login.jsx";
-import Unauthorized from "./pages/UnAuthorized";
-import AdminDashboard from "./pages/AdminDashboard";
-import ProtectedRoute from "./components/protectedRoute";
-import UserDashboard from "./pages/Userdashboard";
-
-function App() {
+import React from 'react'
+import Navbar from './components/Navbar'
+import { Route, Routes } from 'react-router-dom'
+import Principle from './pages/Principle'
+import SubPrinciple from './pages/SubPrinciple'
+import Teachers from './pages/Teachers'
+import Students from './pages/Students'
+import Login from './pages/Login'
+import {Navigate} from "react-router-dom";
+import Unauthorized from './pages/Unauthorized'
+import ProtectedRoutes from './components/ProtectedRoutes'
+import ProtectedRoute from '../../roleBasedRoutingNew/src/components/ProtectedRoute'
+const App = () => {
   return (
-    <BrowserRouter>
+    <div>
+      <Navbar />
       <Routes>
-        {/* Public route */}
+        // Public routes
         <Route path="/login" element={<Login />} />
-
         <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<Navigate to="/login" />} />
 
-        {/* Admin-only routes */}
-        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-          <Route path="/admin" element={<AdminDashboard />} />
+
+        // Protected Reoutes
+        <Route element={<ProtectedRoutes allowedRoles={['principle']} />}>
+        <Route path='/principle' element={<Principle />} />
         </Route>
 
-        {/* User-only routes */}
-        <Route element={<ProtectedRoute allowedRoles={["user"]} />}>
-          <Route path="/user" element={<UserDashboard />} />
+        <Route element={<ProtectedRoutes allowedRoles={['sub-principle','principle']} />}>
+        <Route path='/sub-principle' element={<SubPrinciple />} />
         </Route>
 
-        {/* Default route */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route element={<ProtectedRoutes allowedRoles={['teacher','sub-principle','principle']} />}>
+        <Route path="/teacher" element={<Teachers />} />
+        </Route>
 
-        {/* Unknown routes */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route element={<ProtectedRoutes allowedRoles={['student','teacher','sub-principle','principle']} />}>
+        <Route path="/student" element={<Students />} />
+        </Route>
       </Routes>
-    </BrowserRouter>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
