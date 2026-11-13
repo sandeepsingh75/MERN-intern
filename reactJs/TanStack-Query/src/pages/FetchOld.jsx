@@ -1,11 +1,9 @@
-import React from 'react'
+import axios from 'axios'
 
-const FetchOld = () => {
-  return (
-    <div>
-      <h1>FetchOld</h1>
-    </div>
-  )
-}
+const axiosInstance = axios.create({
+    baseUrl:"https://jsonplaceholder.typicode.com/posts",
+    headers:{
+        "Content-Type":"application-json"
+    }
+})
 
-export default FetchOld
