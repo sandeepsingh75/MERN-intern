@@ -9,7 +9,8 @@ const Header = () => {
       <Link to="/about" className='mx-2'>About</Link>|
       <Link to="/contact" className='mx-2'>Contact</Link>|
       <Link to="/rq" className='mx-2'>ReactQuery</Link>|
-      <Link to="/infinite" className='mx-2'>InfiniteScrolling</Link>
+      <Link to="/infinite" className='mx-2'>InfiniteScrolling</Link> |
+      <Link to="/observer/infinite" className='mx-2'>ObserverInfiniteScrolling</Link>
     </div>
   )
 }

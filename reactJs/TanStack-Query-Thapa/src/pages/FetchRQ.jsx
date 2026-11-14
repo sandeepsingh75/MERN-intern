@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -43,9 +43,11 @@ const FetchRQ = () => {
     status,
     fetchStatus,
     refetch,
+    isPlaceholderData
   } = useQuery({
     queryKey: ["users", page, limit],
     queryFn: () => fetchUsers(page,limit),
+    // placeholderData:keepPreviousData,
     // staleTime:10000,
     // gcTime:300000,
     // refetchOnWindowFocus:true,
@@ -66,7 +68,6 @@ const FetchRQ = () => {
       }));
     },
   });
-
 
 // Mutation funtion to delete the post
 const deleteMutation = useMutation({

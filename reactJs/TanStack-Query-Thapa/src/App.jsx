@@ -9,6 +9,7 @@ import MainLayout from './components/Layout/MainLayout.jsx'
 import {QueryClientProvider, QueryClient} from '@tanstack/react-query'
 import FetchIndv from './components/UI/FetchIndv.jsx'
 import InfiniteScrolling from './pages/InfiniteScrolling.jsx'
+import InfiniteScrollInterSection from './pages/InfiniteScrollInterSection.jsx'
 
 //Create routes
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         path:"/rq/:id",
         element:<FetchIndv />
       },
+      {
+        path:"/observer/infinite",
+        element:<InfiniteScrollInterSection />
+      }
     ]
   }
 ]);

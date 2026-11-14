@@ -5,9 +5,9 @@ import Footer from '../UI/Footer'
 
 const MainLayout = () => {
   return (
-    <div className='min-h-screen w-screen flex flex-col '>
+    <div className='min-h-screen w-full flex flex-col overflow-x-hidden'>
     <Header />
-    <div className='flex-1 flex justify-center'>
+    <div className='flex-1 min-h-0 w-full flex justify-center '>
     <Outlet className='font-bold'/>
     </div>
     <Footer />
